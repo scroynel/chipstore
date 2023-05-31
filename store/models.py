@@ -67,3 +67,17 @@ class AttributesValue(models.Model):
     slug = models.SlugField('Slug', max_length=200)
     attribute = models.ForeignKey('Attribute', on_delete=models.CASCADE)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user}'
+    
+class CartProduct(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
+    count = models.IntegerField('Количество', default=0)
+
+    def __str__(self):
+        return f'{self.cart} --- {self.product} --- {self.count}'
