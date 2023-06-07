@@ -11,6 +11,9 @@ class Product(models.Model):
     company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name='Производитель')
     category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='Категория')
 
+    def __str__(self):
+        return self.name
+
 class Category(MPTTModel):
     name = models.CharField('Категория', max_length=100)
     slug = models.SlugField('Slug', max_length=100)
@@ -19,9 +22,15 @@ class Category(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ['name']
 
+    def __str__(self):
+        return self.name
+
 class Company(models.Model):
     name = models.CharField('Компания', max_length=50)
     slug = models.SlugField('Slug', max_length=50)
+
+    def __str__(self):
+        return self.name
 
 class StarRating(models.Model):
     value = models.SmallIntegerField('Значение', default=0)
