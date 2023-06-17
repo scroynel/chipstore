@@ -45,7 +45,7 @@ class StarRating(models.Model):
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     star = models.ForeignKey('StarRating', on_delete=models.CASCADE, verbose_name='Звезда')
-    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Продукт')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Продукт', related_name='ratings')
 
     def __str__(self):
         return f'{self.user} --- {self.star} --- {self.product}'
@@ -58,8 +58,8 @@ class Review(MPTTModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     email = models.EmailField()
     text = models.TextField('Комеентарий', max_length=2000)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
-    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Продукт')
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Продукт', related_name='reviews')
 
     def __str__(self):
         return f'{self.id} --- {self.user} --- {self.product}'

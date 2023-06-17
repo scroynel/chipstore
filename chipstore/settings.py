@@ -40,9 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'drf_yasg',
     'mptt',
     'ckeditor',
     'ckeditor_uploader',
+    
+    
+    
 
     'store'
 ]
@@ -203,5 +209,12 @@ CKEDITOR_CONFIGS = {
             'elementspath'
         ]),
     }
+}
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
 
