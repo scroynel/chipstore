@@ -33,8 +33,8 @@ class ProductListView(APIView):
     
 
 class ProductDetailView(APIView):
-    def get(self, request, slug):
-        queryset = Product.objects.get(slug = slug)
+    def get(self, request, pk):
+        queryset = Product.objects.get(pk = pk)
         serializer = ProductDetailSerializer(queryset)
         return Response(serializer.data)
 

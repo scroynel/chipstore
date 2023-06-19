@@ -4,7 +4,7 @@ from .views import CreateRatingView, ReviewView, ProductListView, ProductDetailV
 
 urlpatterns = [
     path('products/', ProductListView.as_view()),
-    path('products/<str:slug>/', ProductDetailView.as_view()),
+    path('products/<int:pk>/', ProductDetailView.as_view()),
     path('ratings/', CreateRatingView.as_view()),
     path('reviews/', ReviewView.as_view()),
 ]
